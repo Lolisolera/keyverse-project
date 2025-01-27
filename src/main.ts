@@ -93,11 +93,11 @@ const keyMapping: Record<string, string> = {//represents an object with keys.KEY
   'K': 'C2'   // Key "K" plays the "C2" note (higher octave)
 };
 
-document.addEventListener('keydown', (event) => {
+document.addEventListener('keydown', (event: KeyboardEvent) => {
   const note = keyMapping[event.key.toUpperCase()]; // Convert key to uppercase, otherwise I'll have to select my "alt" key for the sound to happen
   if (note) {
-    playNote(note);
-    highlightKey(note); // highlight the piano key on the screen
+    makeSound(note);
+    buttonAnimation(note); // highlight the piano key on the screen
   }
 });
 
