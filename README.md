@@ -14,30 +14,9 @@ Key-Verse Piano is an interactive virtual piano app designed to bring the joy of
 2. Use your mouse to click on the piano keys or press the following keys on your keyboard to play notes (A, S, D, F, G, H, J, K).
 3. Experiment with different melodies and enjoy creating music!
 
-## Running the App Locally
-To run Key-Verse Piano locally, follow these steps:
+## Running the App 
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Lolisolera/nology-assignments.git
-   ```
-
-2. Navigate to the project directory:
-   ```bash
-   cd keyverse-project
-   ```
-
-3. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-4. Start the development server using Vite:
-   ```bash
-   npm run dev
-   ```
-
-5. Open the app in your browser at the URL provided by Vite (usually  http://localhost:5173/).
+Visit https://lolisolera.github.io/keyverse-project/
 
 
 ## Interacting with the App
