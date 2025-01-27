@@ -1,24 +1,26 @@
 import '../styles/styles.scss';
 
+// Add click event listeners to each piano key
 let numberOfKeys = document.querySelectorAll(".piano__key").length;
 
 for (let i = 0; i < numberOfKeys; i++) {
   document.querySelectorAll(".piano__key")[i].addEventListener("click", function (this: HTMLElement) {
-    let buttonInnerText = this.innerText; // Now TypeScript knows 'this' is an HTMLElement
+    let buttonInnerText = this.innerText.trim(); // Now TypeScript knows 'this' is an HTMLElement
     makeSound(buttonInnerText);
     buttonAnimation(buttonInnerText);
   });
 }
-//Event listener added to keys when pressed
 
+// Event listener added to keys when pressed via keyboard
 document.addEventListener("keydown", (event: KeyboardEvent) => {
-  //document.addEventListener("keydown", function (event) -event type, callback function
-  makeSound(event.key);
-  buttonAnimation(event.key);
+  const note = keyMapping[event.key.toUpperCase()]; // Convert key to uppercase
+  if (note) {
+    makeSound(note); // Play sound using makeSound
+    buttonAnimation(note); // Trigger button animation
+  }
 });
 
-//Funtion to map sounds to keys and switch statement for each key case.
-
+// Function to map sounds to keys
 function makeSound(key: string): void {
   switch (key) {
     case "C":
@@ -65,12 +67,14 @@ function makeSound(key: string): void {
   }
 }
 
-function buttonAnimation(currentKey: string): void {//void - no returned value expected.
+// Function for button animation
+function buttonAnimation(currentKey: string): void {
   const activeButton = document.querySelector(`.piano__key--${currentKey}`) as HTMLElement;
 
   if (activeButton) {
     activeButton.classList.add("pressed");
 
+    // Remove the active class after 100ms to simulate the physical effect
     setTimeout(() => {
       activeButton.classList.remove("pressed");
     }, 100);
@@ -79,39 +83,28 @@ function buttonAnimation(currentKey: string): void {//void - no returned value e
   }
 }
 
-//MAPPING COMPUTER KEYS TO KEYBOARD KEYS
-
-const keyMapping: Record<string, string> = {//represents an object with keys.KEYS are strings "A", "AS", etc, and 
-  //the piano notes are also strings A", "F", etc. 
-  'A': 'C',   // Key "A" plays the "C" note
-  'S': 'D',   // Key "S" plays the "D" note
-  'D': 'E',   // Key "D" plays the "E" note
-  'F': 'F',   // Key "F" plays the "F" note
-  'G': 'G',   // Key "G" plays the "G" note
-  'H': 'A',   // Key "H" plays the "A" note
-  'J': 'B',   // Key "J" plays the "B" note
-  'K': 'C2'   // Key "K" plays the "C2" note (higher octave)
+// Mapping computer keys to piano keys
+const keyMapping: Record<string, string> = {
+  'A': 'C',    // Key "A" plays the "C" note
+  'S': 'D',    // Key "S" plays the "D" note
+  'D': 'E',    // Key "D" plays the "E" note
+  'F': 'F',    // Key "F" plays the "F" note
+  'G': 'G',    // Key "G" plays the "G" note
+  'H': 'A',    // Key "H" plays the "A" note
+  'J': 'B',    // Key "J" plays the "B" note
+  'K': 'C2',   // Key "K" plays the "C2" note (higher octave)
+  'W': 'C#',   // Key "W" plays the "C#" note
+  'E': 'D#',   // Key "E" plays the "D#" note
+  'T': 'F#',   // Key "T" plays the "F#" note
+  'Y': 'G#',   // Key "Y" plays the "G#" note
+  'U': 'A#'    // Key "U" plays the "A#" note
 };
 
+// Adjusted event listener for keyboard keys to trigger the correct sound and animation
 document.addEventListener('keydown', (event: KeyboardEvent) => {
-  const note = keyMapping[event.key.toUpperCase()]; // Convert key to uppercase, otherwise I'll have to select my "alt" key for the sound to happen
+  const note = keyMapping[event.key.toUpperCase()]; // Convert key to uppercase for consistency
   if (note) {
-    makeSound(note);
-    buttonAnimation(note); // highlight the piano key on the screen
+    makeSound(note); // Play the note's sound
+    buttonAnimation(note); // Animate the button corresponding to the note
   }
 });
-
-function playNote(note: string) {
-
-  const audio = new Audio(`/sounds/${note.toLowerCase()}Sound.mp3`); // Ensure the note is in lowercase for the file naming
-  audio.play();
-}
-
-
-function highlightKey(note: string) { // highlight the notes played in the piano.
-  const keyElement = document.querySelector(`[data-note="${note}"]`);
-  if (keyElement) {
-    keyElement.classList.add('active');
-    setTimeout(() => keyElement.classList.remove('active'), 200); // Remove highlight after 200ms
-  }
-}
