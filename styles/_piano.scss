@@ -5,6 +5,7 @@
     height: 200px;
     margin: 20px auto;
     overflow: hidden;
+    position: relative;
 
     &__white-keys {
         display: flex;
@@ -12,7 +13,7 @@
     }
 
     &__black-keys {
-        position: absolute; // Keep the black keys fixed in their position
+        position: absolute;
         top: 10px;
         display: flex;
         z-index: 2; // Black keys on top
@@ -30,8 +31,8 @@
         &--white {
             background-color: white;
             display: flex;
-            justify-content: center; // Center letters in the middle
-            align-items: flex-end; // Move letters to the bottom
+            justify-content: center;
+            align-items: flex-end;
 
             &:hover {
                 background-color: lightgray;
@@ -43,22 +44,34 @@
             height: 130px;
             background-color: black;
             border: 1px solid #000;
-            position: absolute; // Fix black keys in their position
+            position: absolute;
             cursor: pointer;
             border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 5px;
 
             &:hover {
                 background-color: gray;
             }
+
+            // Hide sharp key label by default
+            span {
+                position: absolute;
+                bottom: 5px;
+                left: 50%;
+                transform: translateX(-50%);
+                white-space: nowrap;
+                color: rgba(255, 255, 255, 0); // Fully transparent
+                font-size: 14px;
+                transition: color 0.2s ease-in-out;
+            }
         }
 
-        // Active button animation class when pressed
-        &.pressed {
-            background-color: #ccc;
-            /* Visual feedback when the key is pressed */
-            transform: scale(0.95);
-            /* Slight shrink for the press effect */
-            transition: transform 0.1s ease, background-color 0.1s ease;
+        // Show sharp key label in grey when pressed
+        &--black.pressed span {
+            color: rgba(200, 200, 200, 1); // Light grey when key is pressed
         }
     }
 
@@ -85,7 +98,7 @@
 
     // Responsive design adjustments
     @media (max-width: 923px) and (min-width: 525px) {
-        width: 380px; // Adjust piano width for smaller screens
+        width: 380px;
         height: 160px;
 
         &__key {
@@ -130,6 +143,12 @@
             &--black {
                 width: 24px;
                 height: 80px;
+                font-size: 10px;
+
+                span {
+                    bottom: 3px;
+                    font-size: 10px;
+                }
 
                 &:nth-child(1) {
                     left: 30px;
