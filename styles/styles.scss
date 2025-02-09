@@ -7,17 +7,17 @@ body {
 }
 
 h1 {
-    font-size: 80px; // Default size for desktop
+    font-size: 80px;
     color: #DBEDF3;
     font-family: "Arvo", cursive;
     text-shadow: 3px 0 #DA0463;
 
     @media (max-width: 923px) and (min-width: 525px) {
-        font-size: 64px; //  medium screens
+        font-size: 64px;
     }
 
     @media (max-width: 524px) {
-        font-size: 48px; //  mobile
+        font-size: 48px; 
     }
 }
 
@@ -25,15 +25,15 @@ footer {
     color: #DBEDF3;
     font-family: sans-serif;
     margin-top: 100px;
-    font-size: 19.2px; //  desktop size
+    font-size: 19.2px; 
 
     @media (max-width: 923px) and (min-width: 525px) {
-        font-size: 16px; //  tablet screens
+        font-size: 16px; 
         margin-top: 80px;
     }
 
     @media (max-width: 524px) {
-        font-size: 12.8px; //  mobile
+        font-size: 12.8px; 
         margin-top: 50px;
     }
 }

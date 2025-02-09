@@ -20,52 +20,33 @@ document.addEventListener("keydown", (event: KeyboardEvent) => {
   }
 });
 
-// Function to map sounds to keys
+// Refactored - Function to map sounds to keys
 function makeSound(key: string): void {
-  switch (key) {
-    case "C":
-      new Audio("./sounds/cSound.mp3").play();
-      break;
-    case "D":
-      new Audio("./sounds/dSound.mp3").play();
-      break;
-    case "E":
-      new Audio("./sounds/eSound.mp3").play();
-      break;
-    case "F":
-      new Audio("./sounds/fSound.mp3").play();
-      break;
-    case "G":
-      new Audio("./sounds/gSound.mp3").play();
-      break;
-    case "A":
-      new Audio("./sounds/aSound.mp3").play();
-      break;
-    case "B":
-      new Audio("./sounds/bSound.mp3").play();
-      break;
-    case "C2":
-      new Audio("./sounds/c2Sound.mp3").play();
-      break;
-    case "C#":
-      new Audio("./sounds/c_sharpSound.mp3").play();
-      break;
-    case "D#":
-      new Audio("./sounds/d_sharpSound.mp3").play();
-      break;
-    case "F#":
-      new Audio("./sounds/f_sharpSound.mp3").play();
-      break;
-    case "G#":
-      new Audio("./sounds/g_sharpSound.mp3").play();
-      break;
-    case "A#":
-      new Audio("./sounds/a_sharpSound.mp3").play();
-      break;
-    default:
-      console.log(`Sound not found for key: ${key}`);
+  const sounds: Record<string, string> = {
+    C: "cSound.mp3",
+    D: "dSound.mp3",
+    E: "eSound.mp3",
+    F: "fSound.mp3",
+    G: "gSound.mp3",
+    A: "aSound.mp3",
+    B: "bSound.mp3",
+    C2: "c2Sound.mp3",
+    "C#": "c_sharpSound.mp3",
+    "D#": "d_sharpSound.mp3",
+    "F#": "f_sharpSound.mp3",
+    "G#": "g_sharpSound.mp3",
+    "A#": "a_sharpSound.mp3",
+  };
+
+  const soundFile = sounds[key];
+  if (soundFile) {
+    new Audio(`./sounds/${soundFile}`).play();
+  } else {
+    console.log(`Sound not found for key: ${key}`);
   }
 }
+
+
 
 // Function for button animation
 function buttonAnimation(currentKey: string): void {
